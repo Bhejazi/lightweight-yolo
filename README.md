@@ -1,18 +1,22 @@
-# Single Class Detector (Keras/TensorFlow)
-A lightweight, easy-to-understand object detection pipeline to draw bounding boxes around macaques in images.
+# Single Class Detector
+### A lightweight object detection pipeline to draw bounding boxes around a single class of objects in images.
 
-Framework: Keras / TensorFlow 2.x
-Backbone: MobileNetV2 (pretrained on ImageNet)
-Head: Simple YOLO-style grid (default 7×7) predicting per-cell [objectness, x, y, w, h] (all normalized to [0,1])
-Goal: Clear, maintainable code that trains for at least one epoch and runs inference on new images
+Keras / TensorFlow 2.x Framework built on a MobileNetV2 (pretrained on ImageNet) model
 
-Brief description of repository components:
+Utilizing a simple YOLO-style grid (default 7×7) predicting per-cell [objectness, x, y, w, h] (all normalized to [0,1])
 
-model/detector.py – Model architecture (MobileNetV2 backbone + YOLO-style head) and custom loss
-utils/labels.py – Parse YOLO labels and build (S×S×5) training targets
-utils/data.py – Discover dataset files and build a tf.data pipeline
-train.py – CLI training script
-inference.py – CLI inference & visualization on new images
+
+## Brief description of repository components:
+
+model/detector.py –> Model architecture (MobileNetV2 backbone + YOLO-style head) and custom loss
+
+utils/labels.py –> Parse YOLO labels and build (S×S×5) training targets
+
+utils/data.py –> Discover dataset files and build a tf.data pipeline
+
+train.py –> CLI training script
+
+inference.py –> CLI inference & visualization on new images
 
 
 # Setup
