@@ -4,7 +4,7 @@ Created on Mon Dec  8 15:01:02 2025
 
 @author: bhejazi
 """
-# Run inference on a single image and save visualized bounding boxes.
+# Run inference on a single image and save visualized bounding boxes
 
 import argparse
 from typing import List, Tuple
@@ -12,11 +12,11 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageOps
 import tensorflow as tf
 
-class MacaqueDetector:
+class SingleClassDetector:
     """
-    Wrapper to load the trained model and predict macaque boxes on new images.
+    Wrapper to load the trained model and predict boxes on new images
 
-    Outputs each detection as: (score, x_min, y_min, x_max, y_max) in original image pixels.
+    Outputs each detection as: (score, x_min, y_min, x_max, y_max) in original image pixels
     """
 
     def __init__(self, model_path: str, grid_size: int = 7, input_size: int = 224):
@@ -171,7 +171,7 @@ def nms(boxes: List[Tuple[float, float, float, float, float]], iou_threshold: fl
 
 
 def cli():
-    parser = argparse.ArgumentParser(description="Run Macaque Detector inference on an image")
+    parser = argparse.ArgumentParser(description="Run Detector inference on an image")
     parser.add_argument("--model_path", type=str, required=True)
     parser.add_argument("--image_path", type=str, required=True)
     parser.add_argument("--save_path", type=str, default="outputs/inference_result.jpg")
@@ -180,7 +180,7 @@ def cli():
     parser.add_argument("--input_size", type=int, default=224)
     args = parser.parse_args()
 
-    det = MacaqueDetector(model_path=args.model_path, grid_size=args.grid_size, input_size=args.input_size)
+    det = SingleClassDetector(model_path=args.model_path, grid_size=args.grid_size, input_size=args.input_size)
     boxes = det.predict(args.image_path, score_threshold=args.score_threshold)
     out = det.visualize(args.image_path, boxes, args.save_path)
     print(f"Saved visualization to {out}")
