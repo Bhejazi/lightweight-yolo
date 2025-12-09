@@ -4,19 +4,19 @@ Created on Mon Dec  8 14:56:04 2025
 
 @author: bhejazi
 """
-# Simple YOLO-style, single-class detector using a MobileNetV2 backbone.
+# Simple YOLO-style, single-class detector using a MobileNetV2 backbone
 
 from typing import Tuple
 import tensorflow as tf
 from tensorflow.keras import layers, models
 
 def build_detector(input_shape: Tuple[int, int, int] = (224, 224, 3), grid_size: int = 7) -> tf.keras.Model:
-    # Builds the detector model.
-    # - input_shape: Input image shape.
-    # - grid_size: Number of grid cells per side (S).
-    # Returns: A Keras Model that outputs (S, S, 5) per image.
+    # Builds the detector model
+    # - input_shape: Input image shape
+    # - grid_size: Number of grid cells per side (S)
+    # Returns: A Keras Model that outputs (S, S, 5) per image
     base = tf.keras.applications.MobileNetV2(input_shape=input_shape, include_top=False, weights="imagenet")
-    x = base.output  # feature map (usually 7x7 for 224x224)
+    x = base.output  # feature map
     x = layers.Resizing(grid_size, grid_size, interpolation="bilinear")(x)
     x = layers.Conv2D(128, 3, padding="same", activation="relu")(x)
     x = layers.Conv2D(64, 3, padding="same", activation="relu")(x)
