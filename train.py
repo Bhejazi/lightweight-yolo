@@ -4,7 +4,7 @@ Created on Mon Dec  8 15:00:24 2025
 
 @author: bhejazi
 """
-# Minimal training script for the Macaque Detector.
+# Minimal training script for the Detector
 
 import os
 import argparse
@@ -13,8 +13,8 @@ from model.detector import build_detector, YoloLoss
 from utils.data import discover_dataset, build_tf_dataset
 
 def main():
-    parser = argparse.ArgumentParser(description="Train the Macaque Detector")
-    parser.add_argument("--data_dir", type=str, required=True, help="Root folder containing 0_100 .. 9_100")
+    parser = argparse.ArgumentParser(description="Train the Detector")
+    parser.add_argument("--data_dir", type=str, required=True, help="Root folder containing data")
     parser.add_argument("--epochs", type=int, default=1, help="Number of training epochs")
     parser.add_argument("--batch_size", type=int, default=8, help="Batch size")
     parser.add_argument("--grid_size", type=int, default=7, help="Grid size S (e.g., 7)")
@@ -76,7 +76,7 @@ def main():
     print("Training...")
     history = model.fit(ds_train, epochs=args.epochs)
 
-    model_path = os.path.join(args.output_dir, "macaque_detector.keras")
+    model_path = os.path.join(args.output_dir, "detector.keras")
     print(f"Saving model to {model_path}")
     model.save(model_path)
 
