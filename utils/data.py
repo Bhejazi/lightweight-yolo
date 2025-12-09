@@ -4,7 +4,7 @@ Created on Mon Dec  8 14:59:25 2025
 
 @author: bhejazi
 """
-# Data loading utilities: collect image/label pairs and build tf.data pipelines.
+# Data loading utilities: collect image/label pairs and build tf.data pipelines
 
 from typing import List, Tuple
 import os
@@ -46,7 +46,7 @@ def build_tf_dataset(pairs: List[Tuple[str, str]], grid_size: int = 7, batch_siz
     """Create a tf.data.Dataset of (image_tensor, target_grid) with robust I/O handling."""
 
     def _py_load(image_path: bytes, label_path: bytes):
-        # Always return (np.float32 HxWx3, np.float32 SxSx5) — never None.
+        # Always return (np.float32 HxWx3, np.float32 SxSx5)
         import warnings
 
         ip = image_path.decode("utf-8", errors="ignore")
@@ -103,7 +103,7 @@ def build_tf_dataset(pairs: List[Tuple[str, str]], grid_size: int = 7, batch_siz
         ds = ds.shuffle(buffer_size=min(1000, len(images)))
     ds = ds.map(_map, num_parallel_calls=tf.data.AUTOTUNE)
 
-    # Optionally skip any element that still errors downstream
+    # Optionally skip any element that still give errors in training
     if skip_errors:
         ds = ds.apply(tf.data.experimental.ignore_errors())
 
