@@ -29,12 +29,6 @@ conda activate macaque-env
 python -m pip install -r requirements.txt
 ```
 
-
-Clone via Git:
-Shellgit clone https://github.com/<your-account>/macaque-detector.gitcd macaque-detectorWeitere Zeilen anzeigen
-Or download a ZIP:
-Shell# Examplecurl -L -o macaque-detector.zip https://github.com/<your-account>/macaque-detector/archive/refs/heads/main.zipunzip macaque-detector.zipcd macaque-detector-mainWeitere Zeilen anzeigen
-
 ### 4. Train the model
 
 i. Activate your environment and cd into the working directory of the code
